@@ -48,7 +48,7 @@ function CartWindow(props) {
   // useEffect(() => console.log(cartState), [cartState]);
 
   const { cartState } = useContext(CartContext);
-  console.log(cartState);
+  // console.log(cartState);
 
   const menu = useContext(MenuContext);
 
