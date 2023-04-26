@@ -4,9 +4,7 @@ import { DUMMY_CART } from '../Config/DUMMY_CART';
 
 const initialCartState = DUMMY_CART;
 
-export const CartStateContext = createContext();
-export const CartDispatchContext = createContext();
-export const CartTotalCountContext = createContext();
+export const CartContext = createContext();
 
 function cartReducer(cartState, action) {
   console.log('cartReducer recieved:');
@@ -38,27 +36,7 @@ function cartReducer(cartState, action) {
 
 export const ACTIONS_CART = { INCREMENT: 'increment', DECREMENT: 'decrement' };
 
-export function CartStateContextProvider({ children }) {
-  const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
-
-  return (
-    <CartStateContext.Provider value={cartState}>
-      {children}
-    </CartStateContext.Provider>
-  );
-}
-
-export function CartDispatchContextProvider({ children }) {
-  const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
-
-  return (
-    <CartDispatchContext.Provider value={cartDispatch}>
-      {children}
-    </CartDispatchContext.Provider>
-  );
-}
-
-export function CartTotalCountContextProvider({ children }) {
+export function CartContextProvider({ children }) {
   const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
 
   const cartTotalCount = Array.from(cartState.entries())
@@ -66,8 +44,32 @@ export function CartTotalCountContextProvider({ children }) {
     .toFixed(2);
 
   return (
-    <CartTotalCountContext.Provider value={cartTotalCount}>
+    <CartContext.Provider value={{ cartState, cartDispatch, cartTotalCount }}>
       {children}
-    </CartTotalCountContext.Provider>
+    </CartContext.Provider>
   );
 }
+
+// export function CartDispatchContextProvider({ children }) {
+//   const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
+
+//   return (
+//     <CartDispatchContext.Provider value={cartDispatch}>
+//       {children}
+//     </CartDispatchContext.Provider>
+//   );
+// }
+
+// export function CartTotalCountContextProvider({ children }) {
+//   const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
+
+//   const cartTotalCount = Array.from(cartState.entries())
+//     .reduce((accumulator, currentValue) => accumulator + currentValue[1], 0)
+//     .toFixed(2);
+
+//   return (
+//     <CartTotalCountContext.Provider value={cartTotalCount}>
+//       {children}
+//     </CartTotalCountContext.Provider>
+//   );
+// }

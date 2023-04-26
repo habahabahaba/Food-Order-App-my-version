@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 
 import { MenuContextProvider } from './Context/menuContext';
-import { CartStateContextProvider } from './Context/cartContext';
+import { CartContextProvider } from './Context/cartContext';
 
 import NavigationBar from './Components/NavigationBar';
 import MenuWindow from './Components/MenuWindow';

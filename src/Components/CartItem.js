@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 
-import { CartDispatchContext } from '../Context/cartContext';
+import { CartContext } from '../Context/cartContext';
 import { MenuContext } from '../Context/menuContext';
 import { ACTIONS_CART } from '../Context/cartContext';
 
 export default function CartItem(props) {
-  const cartDispatch = useContext(CartDispatchContext);
+  const { cartState, cartDispatch } = useContext(CartContext);
   const menu = useContext(MenuContext);
 
   function incrementHandle() {
