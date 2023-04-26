@@ -1,5 +1,5 @@
 import React from 'react';
-import { useReducer } from 'react';
+// import { useReducer } from 'react';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import ReactDOM from 'react-dom';
@@ -7,47 +7,57 @@ import ReactDOM from 'react-dom';
 import Button from './Button';
 import Window from './Window';
 
+import {
+  CartStateContextProvider,
+  CartStateContext,
+  CartDispatchContextProvider,
+  CartTotalAmountContextProvider,
+  CartTotalAmountContext,
+} from '../Context/cartContext';
 import { MenuContext } from '../Context/menuContext';
-import { dummyCart } from '../Config/DUMMY_CART';
 import CartItem from './CartItem';
+import { DUMMY_CART } from '../Config/DUMMY_CART';
 
-const initialCartState = dummyCart;
+const initialCartState = DUMMY_CART;
 
-export const ACTIONS_CART = { INCREMENT: 'increment', DECREMENT: 'decrement' };
+// export const ACTIONS_CART = { INCREMENT: 'increment', DECREMENT: 'decrement' };
 
-function cartReducer(cartState, action) {
-  // console.log('cartReducer recieved:');
-  // console.log(action.type);
-  // console.log(action.payload.name);
-  // console.log(action.payload?.quantity);
-  switch (action.type) {
-    case 'increment':
-      cartState.has(action.payload.name)
-        ? cartState.set(
-            action.payload.name,
-            cartState.get(action.payload.name) + (action.payload.quantity || 1)
-          )
-        : cartState.set(action.payload.name, 1);
-      return new Map([...cartState]);
-    case 'decrement':
-      cartState.get(action.payload.name) > 1
-        ? cartState.set(
-            action.payload.name,
-            cartState.get(action.payload.name) - 1
-          )
-        : cartState.delete(action.payload.name);
-      return new Map([...cartState]);
-    default:
-      throw new Error();
-  }
-}
+// function cartReducer(cartState, action) {
+//   // console.log('cartReducer recieved:');
+//   // console.log(action.type);
+//   // console.log(action.payload.name);
+//   // console.log(action.payload?.quantity);
+//   switch (action.type) {
+//     case 'increment':
+//       cartState.has(action.payload.name)
+//         ? cartState.set(
+//             action.payload.name,
+//             cartState.get(action.payload.name) + (action.payload.quantity || 1)
+//           )
+//         : cartState.set(action.payload.name, 1);
+//       return new Map([...cartState]);
+//     case 'decrement':
+//       cartState.get(action.payload.name) > 1
+//         ? cartState.set(
+//             action.payload.name,
+//             cartState.get(action.payload.name) - 1
+//           )
+//         : cartState.delete(action.payload.name);
+//       return new Map([...cartState]);
+//     default:
+//       throw new Error();
+//   }
+// }
 
 function CartWindow(props) {
-  const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
-  useEffect(() => console.log(cartState), [cartState]);
+  // const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
+  // useEffect(() => console.log(cartState), [cartState]);
+
+  const cartState = useContext(CartStateContext);
 
   const menu = useContext(MenuContext);
-  const totalAmount = Array.from(cartState.entries())
+
+  const cartTotalAmount = Array.from(cartState.entries())
     .reduce(
       (accumulator, currentValue) =>
         accumulator +
@@ -56,22 +66,25 @@ function CartWindow(props) {
       0
     )
     .toFixed(2);
+
+  // const cartTotalAmount = useContext(CartTotalAmountContext);
+
   return (
     <Window>
-      {Array.from(cartState.entries()).map(([key, value]) => (
-        <CartItem
-          key={key + Math.random()} // to differ from meals keys
-          name={key}
-          quantity={value}
-          cartDispatch={cartDispatch}
-          state={cartState}
-        />
-      ))}
+      <CartDispatchContextProvider>
+        {Array.from(cartState.entries()).map(([key, value]) => (
+          <CartItem
+            key={key + Math.random()} // to differ from meals keys
+            name={key}
+            quantity={value}
+            // cartDispatch={cartDispatch}
+            state={cartState}
+          />
+        ))}
+      </CartDispatchContextProvider>
       Cart
-      <h1>Total amount: ${totalAmount}</h1>
-      <Button style={{ background: 'orange' }} clickHandler={props.closeCart}>
-        Close
-      </Button>
+      <h1>Total amount: ${cartTotalAmount}</h1>
+      <Button clickHandler={props.closeCart}>Close</Button>
       <Button clickHandler={props.placeOrder}>Order</Button>
     </Window>
   );
@@ -105,11 +118,14 @@ export default function Cart(props) {
         document.getElementById('CartBackdrop')
       )}
       {ReactDOM.createPortal(
-        <CartWindow
-          style={{ background: 'orange' }}
-          closeCart={closeCart}
-          placeOrder={placeOrder}
-        />,
+        <CartStateContextProvider>
+          {' '}
+          <CartWindow
+            style={{ background: 'orange' }}
+            closeCart={closeCart}
+            placeOrder={placeOrder}
+          />
+        </CartStateContextProvider>,
         document.getElementById('CartOverlay')
       )}
     </React.Fragment>

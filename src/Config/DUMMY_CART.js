@@ -1,4 +1,6 @@
-export const dummyCart = new Map([
+export const emptyCart = new Map();
+
+export const DUMMY_CART = new Map([
   ['Sushi', 1],
   ['Schnitzel', 2],
   ['Barbecue Burger', 3],

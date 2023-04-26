@@ -4,7 +4,7 @@ import { MenuContext } from '../Context/menuContext';
 export default function MenuMeal(props) {
   const menu = useContext(MenuContext);
   const meal = menu.find((element) => element.name === props.name);
-  console.log(meal);
+  // console.log(meal);
   return (
     <div>
       <h2>{props.name}</h2>

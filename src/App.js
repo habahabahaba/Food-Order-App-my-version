@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
 
-import MenuContextProvider from './Context/menuContext';
+import { MenuContextProvider } from './Context/menuContext';
+import { CartStateContextProvider } from './Context/cartContext';
 
 import NavigationBar from './Components/NavigationBar';
 import MenuWindow from './Components/MenuWindow';
-import CartWindow from './Components/Cart';
+import Cart from './Components/Cart';
 import FluffWindow from './Components/FluffWindow';
-import Window from './Components/Window';
+// import Window from './Components/Window';
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -22,7 +23,7 @@ function App() {
       <NavigationBar openCart={openCart} />
       <FluffWindow />
       <MenuContextProvider>
-        {showCart && <CartWindow closeCart={closeCart} />}
+        {showCart && <Cart closeCart={closeCart} />}
         <MenuWindow />
       </MenuContextProvider>
     </div>

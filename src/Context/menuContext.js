@@ -3,8 +3,8 @@ import { MENU } from '../Config/MENU';
 
 export const MenuContext = createContext();
 
-function MenuContextProvider({ children }) {
-  return <MenuContext.Provider value={MENU}>{children}</MenuContext.Provider>;
-}
+export function MenuContextProvider({ children }) {
+  const [menu, setMenu] = useState(MENU);
 
-export default MenuContextProvider;
+  return <MenuContext.Provider value={menu}>{children}</MenuContext.Provider>;
+}

@@ -1,20 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
+import { CartDispatchContext } from '../Context/cartContext';
 import { MenuContext } from '../Context/menuContext';
-import { ACTIONS_CART } from './Cart';
+import { ACTIONS_CART } from '../Context/cartContext';
 
 export default function CartItem(props) {
+  const cartDispatch = useContext(CartDispatchContext);
   const menu = useContext(MenuContext);
+
   function incrementHandle() {
     console.log('incr from CartItem');
-    props.cartDispatch({
+    cartDispatch({
       type: 'increment',
       payload: { name: props.name },
     });
   }
   function decrementHandle() {
     console.log('decr from CartItem');
-    props.cartDispatch({
+    cartDispatch({
       type: ACTIONS_CART.DECREMENT,
       payload: { name: props.name },
     });

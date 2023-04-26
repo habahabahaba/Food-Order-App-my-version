@@ -7,7 +7,8 @@ import Window from './Window';
 
 export default function MenuWindow() {
   const menu = useContext(MenuContext);
-  console.log(menu);
+  // console.log(menu);
+
   return (
     <Window>
       Menu:
