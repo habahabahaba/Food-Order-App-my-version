@@ -60,7 +60,7 @@ function CartWindow(props) {
     <Window>
       {Array.from(cartState.entries()).map(([key, value]) => (
         <CartItem
-          key={key}
+          key={key + Math.random()} // to differ from meals keys
           name={key}
           quantity={value}
           cartDispatch={cartDispatch}
