@@ -1,8 +1,8 @@
 import React, { createContext, useReducer } from 'react';
 
-import { DUMMY_CART } from '../Config/DUMMY_CART';
+import { emptyCart } from '../Config/DUMMY_CART';
 
-const initialCartState = DUMMY_CART;
+const initialCartState = emptyCart;
 
 export const CartStateContext = createContext();
 export const CartDispatchContext = createContext();
@@ -39,7 +39,7 @@ function cartReducer(cartState, action) {
             action.payload.name,
             cartState.get(action.payload.name) + (action.payload.quantity || 1)
           )
-        : cartState.set(action.payload.name, 1);
+        : cartState.set(action.payload.name, action.payload.quantity);
       return new Map([...cartState]);
     case 'decrement':
       cartState.get(action.payload.name) > 1
