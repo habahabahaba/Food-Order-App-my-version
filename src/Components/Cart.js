@@ -7,13 +7,7 @@ import ReactDOM from 'react-dom';
 import Button from './Button';
 import Window from './Window';
 
-import {
-  CartStateContextProvider,
-  CartStateContext,
-  CartDispatchContextProvider,
-  CartTotalAmountContextProvider,
-  CartTotalAmountContext,
-} from '../Context/cartContext';
+import { CartContextProvider, CartStateContext } from '../Context/cartContext';
 import { MenuContext } from '../Context/menuContext';
 import CartItem from './CartItem';
 import { DUMMY_CART } from '../Config/DUMMY_CART';
@@ -67,21 +61,17 @@ function CartWindow(props) {
     )
     .toFixed(2);
 
-  // const cartTotalAmount = useContext(CartTotalAmountContext);
-
   return (
     <Window>
-      <CartDispatchContextProvider>
-        {Array.from(cartState.entries()).map(([key, value]) => (
-          <CartItem
-            key={key + Math.random()} // to differ from meals keys
-            name={key}
-            quantity={value}
-            // cartDispatch={cartDispatch}
-            state={cartState}
-          />
-        ))}
-      </CartDispatchContextProvider>
+      {Array.from(cartState.entries()).map(([key, value]) => (
+        <CartItem
+          key={key + Math.random()} // to differ from meals keys
+          name={key}
+          quantity={value}
+          // cartDispatch={cartDispatch}
+          state={cartState}
+        />
+      ))}
       Cart
       <h1>Total amount: ${cartTotalAmount}</h1>
       <Button clickHandler={props.closeCart}>Close</Button>
@@ -118,14 +108,9 @@ export default function Cart(props) {
         document.getElementById('CartBackdrop')
       )}
       {ReactDOM.createPortal(
-        <CartStateContextProvider>
-          {' '}
-          <CartWindow
-            style={{ background: 'orange' }}
-            closeCart={closeCart}
-            placeOrder={placeOrder}
-          />
-        </CartStateContextProvider>,
+        <CartContextProvider>
+          <CartWindow closeCart={closeCart} placeOrder={placeOrder} />
+        </CartContextProvider>,
         document.getElementById('CartOverlay')
       )}
     </React.Fragment>

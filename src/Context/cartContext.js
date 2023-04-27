@@ -8,6 +8,24 @@ export const CartStateContext = createContext();
 export const CartDispatchContext = createContext();
 export const CartTotalCountContext = createContext();
 
+export function CartContextProvider({ children }) {
+  const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
+
+  const cartTotalCount = Array.from(cartState.entries())
+    .reduce((accumulator, currentValue) => accumulator + currentValue[1], 0)
+    .toFixed(2);
+
+  return (
+    <CartStateContext.Provider value={cartState}>
+      <CartDispatchContext.Provider value={cartDispatch}>
+        <CartTotalCountContext.Provider value={cartTotalCount}>
+          {children}
+        </CartTotalCountContext.Provider>
+      </CartDispatchContext.Provider>
+    </CartStateContext.Provider>
+  );
+}
+
 function cartReducer(cartState, action) {
   console.log('cartReducer recieved:');
   console.log(action.type);
@@ -37,37 +55,3 @@ function cartReducer(cartState, action) {
 }
 
 export const ACTIONS_CART = { INCREMENT: 'increment', DECREMENT: 'decrement' };
-
-export function CartStateContextProvider({ children }) {
-  const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
-
-  return (
-    <CartStateContext.Provider value={cartState}>
-      {children}
-    </CartStateContext.Provider>
-  );
-}
-
-export function CartDispatchContextProvider({ children }) {
-  const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
-
-  return (
-    <CartDispatchContext.Provider value={cartDispatch}>
-      {children}
-    </CartDispatchContext.Provider>
-  );
-}
-
-export function CartTotalCountContextProvider({ children }) {
-  const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
-
-  const cartTotalCount = Array.from(cartState.entries())
-    .reduce((accumulator, currentValue) => accumulator + currentValue[1], 0)
-    .toFixed(2);
-
-  return (
-    <CartTotalCountContext.Provider value={cartTotalCount}>
-      {children}
-    </CartTotalCountContext.Provider>
-  );
-}
