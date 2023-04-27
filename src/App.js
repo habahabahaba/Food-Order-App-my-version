@@ -7,6 +7,7 @@ import NavigationBar from './Components/NavigationBar';
 import MenuWindow from './Components/MenuWindow';
 import Cart from './Components/Cart';
 import FluffWindow from './Components/FluffWindow';
+import Background from './Components/Background';
 // import Window from './Components/Window';
 
 function App() {
@@ -20,9 +21,11 @@ function App() {
 
   return (
     <div>
+      <Background />
+      <FluffWindow />
       <CartContextProvider>
         <NavigationBar openCart={openCart} />
-        <FluffWindow />
+
         <MenuContextProvider>
           {showCart && <Cart closeCart={closeCart} />}
           <MenuWindow />

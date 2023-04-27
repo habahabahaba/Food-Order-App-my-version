@@ -1,5 +1,4 @@
 import React from 'react';
-// import { useReducer } from 'react';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import ReactDOM from 'react-dom';
@@ -10,7 +9,6 @@ import Window from './Window';
 import { CartContextProvider, CartStateContext } from '../Context/cartContext';
 import { MenuContext } from '../Context/menuContext';
 import CartItem from './CartItem';
-import { DUMMY_CART } from '../Config/DUMMY_CART';
 
 function CartWindow(props) {
   const cartState = useContext(CartStateContext);

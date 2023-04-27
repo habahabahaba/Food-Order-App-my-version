@@ -1,7 +1,5 @@
 import React from 'react';
-// import { useContext } from 'react';
-
-import { CartContextProvider } from '../Context/cartContext';
+import ReactDOM from 'react-dom';
 
 import Button from './Button';
 import ItemsCounter from './ItemsCounter';
@@ -11,15 +9,14 @@ export default function NavigationBar(props) {
     event.preventDefault();
     props.openCart();
   }
-  return (
+  return ReactDOM.createPortal(
     <div style={{ background: 'lightblue' }}>
       <h1>ReactMeals</h1>{' '}
       <Button clickHandler={openCart}>
         Your Cart
-        {/* <CartContextProvider> */}
         <ItemsCounter />
-        {/* </CartContextProvider> */}
       </Button>{' '}
-    </div>
+    </div>,
+    document.getElementById('NavigationBar')
   );
 }
