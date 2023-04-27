@@ -1,6 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
+import { CartTotalCountContext } from '../Context/cartContext';
 
 export default function ItemsCounter(props) {
-  const [itemsCount] = useState(0);
-  return <span>{itemsCount}</span>;
+  const cartTotalCount = useContext(CartTotalCountContext);
+
+  return <span>{cartTotalCount}</span>;
 }

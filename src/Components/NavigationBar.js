@@ -1,4 +1,7 @@
 import React from 'react';
+// import { useContext } from 'react';
+
+import { CartContextProvider } from '../Context/cartContext';
 
 import Button from './Button';
 import ItemsCounter from './ItemsCounter';
@@ -10,11 +13,13 @@ export default function NavigationBar(props) {
   }
   return (
     <div style={{ background: 'lightblue' }}>
-      <h1>ReactMeals</h1>
+      <h1>ReactMeals</h1>{' '}
       <Button clickHandler={openCart}>
         Your Cart
+        {/* <CartContextProvider> */}
         <ItemsCounter />
-      </Button>
+        {/* </CartContextProvider> */}
+      </Button>{' '}
     </div>
   );
 }

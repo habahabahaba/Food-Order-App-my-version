@@ -13,7 +13,7 @@ export function CartContextProvider({ children }) {
 
   const cartTotalCount = Array.from(cartState.entries())
     .reduce((accumulator, currentValue) => accumulator + currentValue[1], 0)
-    .toFixed(2);
+    .toFixed(0);
 
   return (
     <CartStateContext.Provider value={cartState}>

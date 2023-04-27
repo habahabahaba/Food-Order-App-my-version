@@ -108,9 +108,9 @@ export default function Cart(props) {
         document.getElementById('CartBackdrop')
       )}
       {ReactDOM.createPortal(
-        <CartContextProvider>
-          <CartWindow closeCart={closeCart} placeOrder={placeOrder} />
-        </CartContextProvider>,
+        // <CartContextProvider>
+        <CartWindow closeCart={closeCart} placeOrder={placeOrder} />,
+        // </CartContextProvider>,
         document.getElementById('CartOverlay')
       )}
     </React.Fragment>
