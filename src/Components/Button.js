@@ -1,16 +1,14 @@
 import React from 'react';
 
+import classes from './Button.module.css';
+
 export default function Button(props) {
-  const itemCount = '0';
   return (
-    <button onClick={props.clickHandler}>
-      {/* <svg>
-        {' '}
-        <path>{props.iconPath}</path>
-      </svg>
-      {props.label} */}
+    <button
+      onClick={props.clickHandler}
+      className={`${classes.button} ${props.className}`}
+    >
       {props.children}
-      {/* <span>{itemCount}</span> */}
     </button>
   );
 }

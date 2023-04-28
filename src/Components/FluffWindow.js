@@ -12,7 +12,8 @@ export default function FluffWindow() {
   return ReactDOM.createPortal(
     <Window className={classes.fluff}>
       <h2>{fluffText.header}</h2>
-      <p>{fluffText.body}</p>
+      <p>{fluffText.body1}</p>
+      <p>{fluffText.body2}</p>
     </Window>,
     document.getElementById('FluffWindow')
   );

@@ -1,7 +1,10 @@
 import React, { useContext, useRef } from 'react';
 import { MenuContext } from '../Context/menuContext';
 import { CartDispatchContext } from '../Context/cartContext';
+
 import Button from './Button';
+
+import classes from './MenuMeal.module.css';
 
 export default function MenuMeal(props) {
   const menu = useContext(MenuContext);
@@ -22,22 +25,24 @@ export default function MenuMeal(props) {
   }
 
   return (
-    <div>
+    <div className={classes.meal}>
       <div>
-        <h2>{props.name}</h2>
-        <p>{meal.description}</p>
-        <h2>${meal.price}</h2>
+        <h3>{props.name}</h3>
+        <p className={classes.description}>{meal.description}</p>
+        <h3 className={classes.price}>${meal.price}</h3>
       </div>
-      <div>
+      <form className={classes.form}>
+        <label for='quantity'>Amount</label>
         <input
           type='number'
           min='1'
           step='1'
           defaultValue='1'
           ref={quantityRef}
+          id='quantity'
         />
         <Button clickHandler={incrementHandle}>+Add</Button>
-      </div>
+      </form>
     </div>
   );
 }

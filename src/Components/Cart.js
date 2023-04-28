@@ -37,10 +37,11 @@ function CartWindow(props) {
           state={cartState}
         />
       ))}
-      Cart
-      <h1>Total amount: ${cartTotalAmount}</h1>
-      <Button clickHandler={props.closeCart}>Close</Button>
-      <Button clickHandler={props.placeOrder}>Order</Button>
+      <div className={classes.actions}>
+        <h1>Total amount: ${cartTotalAmount}</h1>
+        <button clickHandler={props.closeCart}>Close</button>
+        <button clickHandler={props.placeOrder}>Order</button>{' '}
+      </div>
     </Window>
   );
 }
