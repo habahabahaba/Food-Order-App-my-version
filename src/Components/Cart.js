@@ -3,12 +3,14 @@ import { useEffect } from 'react';
 import { useContext } from 'react';
 import ReactDOM from 'react-dom';
 
-import Button from './Button';
-import Window from './Window';
-
 import { CartContextProvider, CartStateContext } from '../Context/cartContext';
 import { MenuContext } from '../Context/menuContext';
+
+import Button from './Button';
+import Window from './Window';
 import CartItem from './CartItem';
+
+import classes from './Cart.module.css';
 
 function CartWindow(props) {
   const cartState = useContext(CartStateContext);
@@ -26,7 +28,7 @@ function CartWindow(props) {
     .toFixed(2);
 
   return (
-    <Window>
+    <Window className={classes.modal}>
       {Array.from(cartState.entries()).map(([key, value]) => (
         <CartItem
           key={key + Math.random()} // to differ from meals keys
@@ -44,12 +46,7 @@ function CartWindow(props) {
 }
 
 function CartBackdrop(props) {
-  return (
-    <div
-      style={{ height: '3rem', background: 'darkgrey' }}
-      onClick={props.closeCart}
-    ></div>
-  );
+  return <div className={classes.backdrop} onClick={props.closeCart}></div>;
 }
 
 export default function Cart(props) {

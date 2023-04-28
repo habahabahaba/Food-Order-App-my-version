@@ -29,7 +29,7 @@ export default function CartItem(props) {
       <h2>{props.name}</h2>
       <p>${menu.find((meal) => meal.name === props.name).price}</p>
       <h3>x{props.quantity}</h3>
-      <h3>x{cartState.get(props.name)}</h3>
+      {/* <h3>x{cartState.get(props.name)}</h3> */}
       <button onClick={decrementHandle}>-</button>
       <button onClick={incrementHandle}>+</button>
     </div>
