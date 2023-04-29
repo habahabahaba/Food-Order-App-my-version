@@ -24,7 +24,7 @@ function CartWindow(props) {
 
   useEffect(() => {
     cartState.size === 0 && props.closeCart();
-  }, [cartState]);
+  }, [cartState, props]);
 
   const cartTotalAmount = Array.from(cartState.entries())
     .reduce(
