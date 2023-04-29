@@ -20,7 +20,10 @@ export default function MenuMeal(props) {
     if (+quantityRef.current.value < 1) return;
     cartDispatch({
       type: 'increment',
-      payload: { name: props.name, quantity: +quantityRef.current.value },
+      payload: {
+        name: props.name,
+        quantity: parseInt(quantityRef.current?.value),
+      },
     });
     quantityRef.current.value = 1;
   }
@@ -40,6 +43,7 @@ export default function MenuMeal(props) {
             min='1'
             step='1'
             defaultValue='1'
+            // readOnly={true}
             ref={quantityRef}
             id='quantity'
           />
