@@ -17,6 +17,7 @@ export default function MenuMeal(props) {
   function incrementHandle(event) {
     event.preventDefault();
     // console.log('incr from MenuMeal');
+    if (+quantityRef.current.value < 1) return;
     cartDispatch({
       type: 'increment',
       payload: { name: props.name, quantity: +quantityRef.current.value },
