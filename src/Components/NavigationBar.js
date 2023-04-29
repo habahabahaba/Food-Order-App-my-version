@@ -33,7 +33,7 @@ export default function NavigationBar(props) {
   const [flash, setFlash] = useState(false);
   function flashItemsCounter() {
     setFlash(true);
-    setTimeout(() => setFlash(false), 550);
+    setTimeout(() => setFlash(false), 500);
     // console.log(flash);
   }
   return ReactDOM.createPortal(
