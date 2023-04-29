@@ -7,7 +7,11 @@
 
 .main-image img {
   width: 110%;
-  height: 100%;
+  height: 90%;
   object-fit: cover;
-  transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
+  /* transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem); */
+  transform: rotateZ(-5deg) translateY(-2rem) translateX(-1rem);
+  /* filter: contrast(110%); */
+  /* filter: brightness(110%); */
+  /* filter: sepia(25%); */
 }

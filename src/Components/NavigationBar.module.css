@@ -4,7 +4,8 @@
   left: 0;
   width: 100%;
   height: 5rem;
-  background-color: #8a2b06;
+  /* background-color: #8a2b06; */
+  background-color: #068a55;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -20,10 +21,11 @@
   margin-right: 0.5rem;
 }
 
-.counter {
+/* .counter {
   background-color: #b94517;
+  background-color: #055f3b;
   padding: 0.25rem 1rem;
   border-radius: 25px;
   margin-left: 1rem;
   font-weight: bold;
-}
+} */

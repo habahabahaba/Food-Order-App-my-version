@@ -1,15 +1,21 @@
 .counter {
-  background-color: #b94517;
+  /* background-color: #b94517; */
+  background-color: #e11111;
   padding: 0.25rem 1rem;
   border-radius: 25px;
   margin-left: 1rem;
   font-weight: bold;
+  transition-duration: 400ms;
+  transition-timing-function: ease;
 }
 
 .counter_inactive {
-  background-color: #9037137f;
+  /* background-color: #9037137f; */
+  background-color: #4d836e;
   padding: 0.25rem 1rem;
   border-radius: 25px;
   margin-left: 1rem;
   font-weight: bold;
+  transition-duration: 1000ms;
+  transition-timing-function: ease;
 }

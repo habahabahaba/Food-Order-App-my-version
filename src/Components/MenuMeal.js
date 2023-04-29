@@ -16,7 +16,7 @@ export default function MenuMeal(props) {
 
   function incrementHandle(event) {
     event.preventDefault();
-    console.log('incr from MenuMeal');
+    // console.log('incr from MenuMeal');
     cartDispatch({
       type: 'increment',
       payload: { name: props.name, quantity: +quantityRef.current.value },
@@ -32,15 +32,17 @@ export default function MenuMeal(props) {
         <h3 className={classes.price}>${meal.price}</h3>
       </div>
       <form className={classes.form}>
-        <label for='quantity'>Amount</label>
-        <input
-          type='number'
-          min='1'
-          step='1'
-          defaultValue='1'
-          ref={quantityRef}
-          id='quantity'
-        />
+        <div className={classes.input}>
+          <label htmlFor='quantity'>Amount</label>
+          <input
+            type='number'
+            min='1'
+            step='1'
+            defaultValue='1'
+            ref={quantityRef}
+            id='quantity'
+          />
+        </div>
         <Button clickHandler={incrementHandle}>+Add</Button>
       </form>
     </div>

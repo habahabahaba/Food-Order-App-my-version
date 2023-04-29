@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useContext } from 'react';
+import { useState } from 'react';
+
+import { CartTotalCountContext } from '../Context/cartContext';
 
 import Button from './Button';
 import ItemsCounter from './ItemsCounter';
@@ -20,9 +24,17 @@ function CartIcon() {
 }
 
 export default function NavigationBar(props) {
+  const cartTotalCount = useContext(CartTotalCountContext);
+
   function openCart(event) {
     event.preventDefault();
-    props.openCart();
+    cartTotalCount > 0 ? props.openCart() : flashItemsCounter();
+  }
+  const [flash, setFlash] = useState(false);
+  function flashItemsCounter() {
+    setFlash(true);
+    setTimeout(() => setFlash(false), 550);
+    // console.log(flash);
   }
   return ReactDOM.createPortal(
     <div className={classes.bar}>
@@ -30,8 +42,8 @@ export default function NavigationBar(props) {
       <Button clickHandler={openCart}>
         <CartIcon />
         Your Cart
-        <ItemsCounter />
-      </Button>{' '}
+        <ItemsCounter flash={flash} />
+      </Button>
     </div>,
     document.getElementById('NavigationBar')
   );

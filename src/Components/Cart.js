@@ -3,10 +3,14 @@ import { useEffect } from 'react';
 import { useContext } from 'react';
 import ReactDOM from 'react-dom';
 
-import { CartContextProvider, CartStateContext } from '../Context/cartContext';
+import {
+  CartStateContext,
+  CartDispatchContext,
+  ACTIONS_CART,
+} from '../Context/cartContext';
 import { MenuContext } from '../Context/menuContext';
 
-import Button from './Button';
+// import Button from './Button';
 import Window from './Window';
 import CartItem from './CartItem';
 
@@ -14,8 +18,13 @@ import classes from './Cart.module.css';
 
 function CartWindow(props) {
   const cartState = useContext(CartStateContext);
+  const cartDispatch = useContext(CartDispatchContext);
 
   const menu = useContext(MenuContext);
+
+  useEffect(() => {
+    cartState.size === 0 && props.closeCart();
+  }, [cartState]);
 
   const cartTotalAmount = Array.from(cartState.entries())
     .reduce(
@@ -26,6 +35,24 @@ function CartWindow(props) {
       0
     )
     .toFixed(2);
+
+  function placeOrder(event) {
+    event.preventDefault();
+    cartState.size < 1 // checking for an empty cart
+      ? alert(`Please add something to your cart before placing an order.`)
+      : alert(`
+        Your order (total cost: $${cartTotalAmount}) is on its way. 
+
+        Please feel free to tip your courier. 
+
+      
+        Meanwhile, take a look at our loyalty program.`);
+    cartDispatch({
+      type: ACTIONS_CART.RESET,
+    });
+    // console.log(cartState);
+    // props.closeCart();
+  }
 
   return (
     <Window className={classes.modal}>
@@ -38,9 +65,16 @@ function CartWindow(props) {
         />
       ))}
       <div className={classes.actions}>
-        <h1>Total amount: ${cartTotalAmount}</h1>
-        <button clickHandler={props.closeCart}>Close</button>
-        <button clickHandler={props.placeOrder}>Order</button>{' '}
+        <h1 className={classes.total}>
+          Total amount: <span>${cartTotalAmount}</span>
+        </h1>
+        <button onClick={props.closeCart}>Close</button>
+        <button
+          className={cartTotalAmount > 0 ? classes.button : null}
+          onClick={placeOrder}
+        >
+          Order
+        </button>
       </div>
     </Window>
   );
@@ -52,14 +86,8 @@ function CartBackdrop(props) {
 
 export default function Cart(props) {
   function closeCart(event) {
-    event.preventDefault();
+    event && event.preventDefault();
     props.closeCart();
-  }
-  function placeOrder(event) {
-    event.preventDefault();
-    alert(
-      'Your order is on the way. Meanwhile, take a look at our loyalty program.'
-    );
   }
 
   return (
@@ -70,7 +98,7 @@ export default function Cart(props) {
       )}
       {ReactDOM.createPortal(
         // <CartContextProvider>
-        <CartWindow closeCart={closeCart} placeOrder={placeOrder} />,
+        <CartWindow closeCart={closeCart} />,
         // </CartContextProvider>,
         document.getElementById('CartOverlay')
       )}

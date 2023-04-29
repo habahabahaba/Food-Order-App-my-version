@@ -27,10 +27,10 @@ export function CartContextProvider({ children }) {
 }
 
 function cartReducer(cartState, action) {
-  console.log('cartReducer recieved:');
-  console.log(action.type);
-  console.log(action.payload.name);
-  console.log(action.payload?.quantity);
+  // console.log('cartReducer recieved:');
+  // console.log(action.type);
+  // console.log(action.payload.name);
+  // console.log(action.payload?.quantity);
 
   switch (action.type) {
     case 'increment':
@@ -49,9 +49,17 @@ function cartReducer(cartState, action) {
           )
         : cartState.delete(action.payload.name);
       return new Map([...cartState]);
+    case 'reset':
+      // console.log('reset from cartReducer');
+      return new Map();
+
     default:
       throw new Error();
   }
 }
 
-export const ACTIONS_CART = { INCREMENT: 'increment', DECREMENT: 'decrement' };
+export const ACTIONS_CART = {
+  INCREMENT: 'increment',
+  DECREMENT: 'decrement',
+  RESET: 'reset',
+};

@@ -6,7 +6,8 @@ export default function Button(props) {
   return (
     <button
       onClick={props.clickHandler}
-      className={`${classes.button} ${props.className}`}
+      onMouseEnter={props.onMouseEnter}
+      className={`${classes.button} ${props?.className}`}
     >
       {props.children}
     </button>

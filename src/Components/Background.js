@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import classes from './Background.module.css';
-import mealsImage from '../IMG/meals.jpg';
+import mealsImage from '../IMG/meals11.jpg';
 
 export default function Background() {
   return (
