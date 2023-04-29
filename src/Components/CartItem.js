@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { CartStateContext, CartDispatchContext } from '../Context/cartContext';
+import { CartDispatchContext } from '../Context/cartContext';
 import { MenuContext } from '../Context/menuContext';
 import { ACTIONS_CART } from '../Context/cartContext';
 
